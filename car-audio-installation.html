@@ -203,6 +203,155 @@
             color: var(--primary-color);
         }
 
+        /* Book Now Dropdown Styles */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            bottom: 100%;
+            margin-bottom: 8px;
+            background-color: var(--white);
+            min-width: 170px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .dropdown-menu a, .dropdown-menu button {
+            color: var(--text-dark);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            width: 100%;
+            background: none;
+            border: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .dropdown-menu a:hover, .dropdown-menu button:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .dropdown.active .dropdown-menu {
+            display: block;
+        }
+
+        /* Modal / Pop-up Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(2px);
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 550px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: var(--secondary-color);
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+
+        .response-notice {
+            background-color: #fff8e6;
+            border-left: 4px solid #f39c12;
+            padding: 10px 15px;
+            font-size: 0.88rem;
+            color: #795548;
+            margin: 15px 0 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .quote-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .quote-form label {
+            display: block;
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .quote-form input, 
+        .quote-form select, 
+        .quote-form textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .quote-form input:focus, 
+        .quote-form select:focus, 
+        .quote-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .radio-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: normal;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .radio-label input {
+            width: auto;
+        }
+
         /* Why Choose Us Section */
 
         .badges-grid {
@@ -412,7 +561,7 @@
             <p>Professional car stereo, speaker, subwoofer, amplifier and Apple CarPlay installation from our Petersham workshop. Workmanship Guarantee on all custom car audio, UHF radio, marine sound, and dash camera installations. Trusted by Sydneysiders since 1956.</p>
             <div class="hero-ctas">
                 <a href="#services" class="btn btn-primary">Get an Installation Quote</a>
-                <a href="tel:0290000000" class="btn btn-secondary">Call Workshop: (02) 9568 8888</a>
+                <a href="tel:0295688888" class="btn btn-secondary">Call Workshop: (02) 9568 8888</a>
             </div>
             <div class="trust-bar">
                 <span>⭐ 4.2/5 Google Rating · 300+ Reviews</span>
@@ -443,7 +592,13 @@
                     </div>
                     <div class="card-footer">
                         <span class="price">From $120</span>
-                        <a href="#contact" class="btn btn-primary">Book Now</a>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" onclick="toggleDropdown(event)">Book Now ▾</button>
+                            <div class="dropdown-menu">
+                                <a href="tel:0295688888">📞 Call Workshop</a>
+                                <button onclick="openQuoteModal('Car Audio Installation')">📝 Request Quote</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -460,7 +615,13 @@
                     </div>
                     <div class="card-footer">
                         <span class="price">From $90</span>
-                        <a href="#contact" class="btn btn-primary">Book Now</a>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" onclick="toggleDropdown(event)">Book Now ▾</button>
+                            <div class="dropdown-menu">
+                                <a href="tel:0295688888">📞 Call Workshop</a>
+                                <button onclick="openQuoteModal('UHF / Custom-Fit Radio Installation')">📝 Request Quote</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -477,7 +638,13 @@
                     </div>
                     <div class="card-footer">
                         <span class="price">From $120</span>
-                        <a href="#contact" class="btn btn-primary">Book Now</a>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" onclick="toggleDropdown(event)">Book Now ▾</button>
+                            <div class="dropdown-menu">
+                                <a href="tel:0295688888">📞 Call Workshop</a>
+                                <button onclick="openQuoteModal('Marine Audio Installation')">📝 Request Quote</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -494,7 +661,13 @@
                     </div>
                     <div class="card-footer">
                         <span class="price">From $70</span>
-                        <a href="#contact" class="btn btn-primary">Book Now</a>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" onclick="toggleDropdown(event)">Book Now ▾</button>
+                            <div class="dropdown-menu">
+                                <a href="tel:0295688888">📞 Call Workshop</a>
+                                <button onclick="openQuoteModal('Dash Camera Installation')">📝 Request Quote</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -511,7 +684,13 @@
                     </div>
                     <div class="card-footer">
                         <span class="price">From $120</span>
-                        <a href="#contact" class="btn btn-primary">Book Now</a>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" onclick="toggleDropdown(event)">Book Now ▾</button>
+                            <div class="dropdown-menu">
+                                <a href="tel:0295688888">📞 Call Workshop</a>
+                                <button onclick="openQuoteModal('Supply Your Own Product Installation')">📝 Request Quote</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -730,7 +909,7 @@
             <p>Visit our Petersham workshop or contact our expert team today for a quick quote.</p>
             <div class="btn-container">
                 <a href="tel:(02) 9568 8888" class="btn btn-primary">Call Workshop: (02) 9568 8888</a>
-                <a href="mailto:info@example.com" class="btn btn-secondary">Request an Online Quote</a>
+                <button onclick="openQuoteModal()" class="btn btn-secondary">Request an Online Quote</button>
             </div>
         </div>
     </section>
@@ -742,5 +921,120 @@
         </div>
     </footer>
 
+    <!-- Quote Request Modal -->
+    <div id="quoteModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeQuoteModal()">&times;</span>
+            <div class="modal-header">
+                <h2>Request an Installation Quote</h2>
+            </div>
+            <div class="response-notice">
+                ℹ️ We'll get back to you within 1 working day (We work Monday to Friday).
+            </div>
+            <form class="quote-form" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label for="fullName">Name *</label>
+                    <input type="text" id="fullName" name="fullName" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone *</label>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="0400 000 000">
+                </div>
+                <div class="form-group">
+                    <label for="emailAddress">Email *</label>
+                    <input type="email" id="emailAddress" name="emailAddress" required placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Preferred Contact Method</label>
+                    <div class="radio-group">
+                        <label class="radio-label"><input type="radio" name="contactMethod" value="No preference" checked> No preference</label>
+                        <label class="radio-label"><input type="radio" name="contactMethod" value="Phone call"> Phone call</label>
+                        <label class="radio-label"><input type="radio" name="contactMethod" value="Text message"> Text message</label>
+                        <label class="radio-label"><input type="radio" name="contactMethod" value="Email"> Email</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="vehicleInfo">Vehicle (Year, Make, Model) *</label>
+                    <input type="text" id="vehicleInfo" name="vehicleInfo" required placeholder="e.g. 2018 Toyota Hilux">
+                </div>
+                <div class="form-group">
+                    <label for="serviceRequirement">Requirement *</label>
+                    <select id="serviceRequirement" name="serviceRequirement" required>
+                        <option value="Car Audio Installation">Car Audio Installation</option>
+                        <option value="UHF / Custom-Fit Radio Installation">UHF / Custom-Fit Radio Installation</option>
+                        <option value="Marine Audio Installation">Marine Audio Installation</option>
+                        <option value="Dash Camera Installation">Dash Camera Installation</option>
+                        <option value="Supply Your Own Product Installation">Supply Your Own Product Installation</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="additionalDetails">Any other details</label>
+                    <textarea id="additionalDetails" name="additionalDetails" rows="3" placeholder="Tell us more about what you'd like installed..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Quote Request</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Dropdown Toggle Logic
+        function toggleDropdown(event) {
+            event.stopPropagation();
+            const currentDropdown = event.currentTarget.closest('.dropdown');
+            
+            // Close all other open dropdowns
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                if (dropdown !== currentDropdown) {
+                    dropdown.classList.remove('active');
+                }
+            });
+
+            currentDropdown.classList.toggle('active');
+        }
+
+        // Close dropdowns when clicking anywhere outside
+        window.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown').forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            }
+        });
+
+        // Modal Logic
+        const modal = document.getElementById('quoteModal');
+
+        function openQuoteModal(selectedRequirement = '') {
+            if (selectedRequirement) {
+                const reqSelect = document.getElementById('serviceRequirement');
+                reqSelect.value = selectedRequirement;
+            }
+            modal.style.display = 'block';
+            
+            // Close any open dropdowns
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+
+        function closeQuoteModal() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking on dark overlay outside modal content
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeQuoteModal();
+            }
+        });
+
+        // Simple Form Submission Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert('Thank you! Your quote request has been submitted. We will get back to you within 1 working day (Monday to Friday).');
+            closeQuoteModal();
+            event.target.reset();
+        }
+    </script>
 </body>
 </html>
